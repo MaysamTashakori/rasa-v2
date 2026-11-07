@@ -19,9 +19,11 @@
 - تغییر محتوا = بیلد لازم نیست (سرور می‌خواند) ولی کامیت هست.
 
 ## دیپلوی
-- سرور S1: `root@5.9.89.137` · `/opt/rasa-v2` · پورت ۸۷۴۱ · دیتا: `/opt/rasa-v2-data` · env: `/etc/rasa-v2.env`
-- قدیمی (نسل ۱) روی ۸۷۴۰ — تا تأیید نهایی دست نمی‌زنیم.
-- nginx دامنهٔ rasa-prompt.ir را به ۱۲۷.۰.۰.۱:۸۷۴۱ پروکسی می‌کند (پس از cutover).
+- سرور S1: `root@5.9.89.137` · `/opt/rasa-v2` · پورت **۸۷۴۲** · دیتا: `/opt/rasa-v2-data` · env: `/etc/rasa-v2.env`
+- دیپلوی: `ssh root@5.9.89.137 'cd /opt/rasa-v2 && RASA2_PORT=8742 bash deploy/deploy.sh'`
+- **cutover انجام شد (۱۴۰۵/۰۸/۱۶):** nginx ‏rasa-prompt.ir → ۱۲۷.۰.0.۱:۸۷۴۲. بکاپ پیکربندی قبلی در `/root/rasa-prompt.nginx.bak.*`؛ نسل ۱ هنوز روی ۸۷۴۰ اجراست (بازگشت فوری: sed معکوس + reload).
+- دامنهٔ تست: `edu2.5-9-89-137.sslip.io` (HTTP → ۸۷۴۲).
+- بیلد dist فقط محلی قبل از push — روی سرور بیلد نمی‌کنیم (working tree تمیز بماند).
 
 ## ربات‌ها
 - webhookها: `POST /api/bots/{telegram|bale}` با هدر/کوئری `WEBHOOK_SECRET` — setWebhook دستی.

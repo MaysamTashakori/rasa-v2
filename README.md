@@ -23,7 +23,7 @@ PORT=8080 FIRST_USER_FOUNDER=1 node server/index.mjs
 ## استقرار
 
 ```bash
-ssh root@5.9.89.137 "cd /opt/rasa-v2 && RASA2_PORT=8741 ./deploy/deploy.sh"
+ssh root@5.9.89.137 'cd /opt/rasa-v2 && RASA2_PORT=8742 bash deploy/deploy.sh'
 ```
 
 داکر `node:24-alpine`، کد read-only، دیتا در volume جدا. nginx جلوتر می‌نشیند.

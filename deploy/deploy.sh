@@ -11,9 +11,7 @@ echo "🚇 deploy $NAME on :$PORT"
 
 git pull --ff-only || echo "⚠️  git pull ناموفق — با کد فعلی ادامه می‌دهیم"
 
-# بیلد باید قبل از push انجام شده باشد (dist کامیت می‌شود)؛ برای اطمینان دوباره:
-docker run --rm -v "$PWD:/app" -w /app node:24-alpine sh -c \
-  "node apps/site/build.mjs" 2>/dev/null || echo "⚠️  بیلد درون داکر انجام نشد؛ dist موجود استفاده می‌شود"
+# بیلدِ dist باید قبل از push به صورت محلی انجام شده باشد (dist کامیت می‌شود؛ روی سرور بیلد نمی‌کنیم تا working tree تمیز بماند)
 
 docker rm -f "$NAME" 2>/dev/null || true
 docker run -d --name "$NAME" \

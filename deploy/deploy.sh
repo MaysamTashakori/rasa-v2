@@ -23,6 +23,7 @@ docker run -d --name "$NAME" \
   -e DATA_DIR=/data -e NODE_NO_WARNINGS=1 \
   -v "$PWD:/app:ro" \
   -v "$DATA:/data" \
+  -w /app \
   node:24-alpine node server/index.mjs
 
 echo "⏳ health…"

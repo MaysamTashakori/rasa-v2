@@ -1,0 +1,124 @@
+/* ============================================================
+   رسا ۲ — توکن‌های طراحی «کاغذ و ماژیک»
+   کاغذ گرم + جوهر تیره + ماژیک زرد = نقشه‌ای که با تلاش روشن می‌شود
+   ============================================================ */
+
+:root{
+  /* کاغذ و جوهر */
+  --paper:#F7F4ED;        /* زمینهٔ کاغذی گرم */
+  --paper-2:#EFEAE0;      /* کاغذ کمی تیره‌تر (نوارها) */
+  --card:#FFFFFF;         /* سطح کارت */
+  --ink:#191714;          /* جوهر اصلی */
+  --ink-2:#3D3A34;        /* جوهر ثانویه */
+  --mute:#6B655B;         /* متن کم‌رنگ */
+  --line:#E5DFD2;         /* خط جدول/کارتن */
+  --line-2:#CFC7B6;       /* خط پررنگ‌تر */
+
+  /* ماژیک */
+  --hi:#FFE24B;           /* ماژیک زرد — هایلایت گام‌ها و کلمات کلیدی */
+  --hi-soft:#FFF3B0;      /* ماژیک کم‌رنگ (پس‌زمینه‌ها) */
+
+  /* مهرها (سه حالت ایستگاه) */
+  --ok:#1E8E5A;           /* بلد */
+  --ok-soft:#DFF2E7;
+  --mid:#E8A400;          /* در تمرین */
+  --mid-soft:#FFF1CC;
+  --next:#D6453D;         /* گام بعدی */
+  --next-soft:#FBE3E1;
+
+  /* خطوط مترو */
+  --L-m8:#C0392B;         /* خط ریاضی هشتم — قرمز آجری */
+  --L-m2:#2E8E5A;         /* خط ریاضی دوم — سبز */
+  --L-f2:#3B5BB5;         /* خط فارسی دوم — نیلی */
+  --L-s2:#1F8A8C;         /* خط علوم دوم — فیروزه‌ای */
+
+  /* هندسه و سایه */
+  --r-lg:18px; --r-md:12px; --r-sm:8px;
+  --sh:0 1px 2px rgba(25,23,20,.05), 0 8px 24px -12px rgba(25,23,20,.18);
+  --sh-up:0 2px 4px rgba(25,23,20,.06), 0 16px 40px -16px rgba(25,23,20,.28);
+
+  /* تایپوگرافی */
+  --f-sans:'Vazirmatn', system-ui, sans-serif;
+  --f-mono:ui-monospace, 'Cascadia Mono', Consolas, monospace;
+
+  /* حرکت */
+  --t-fast:.18s cubic-bezier(.4,0,.2,1);
+  --t-mid:.45s cubic-bezier(.22,1,.36,1);
+}
+
+/* ---------- ریست سبک ---------- */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:var(--f-sans);
+  font-size:15.5px; line-height:1.9;
+  color:var(--ink);
+  background:var(--paper);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+/* بافت کاغذ: نقطه‌های بسیار ظریف روی زمینه */
+body::before{
+  content:''; position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background-image:radial-gradient(rgba(25,23,20,.045) 1px, transparent 1px);
+  background-size:22px 22px;
+}
+img,svg{max-width:100%; display:block}
+a{color:inherit; text-decoration:none}
+button{font:inherit; color:inherit; cursor:pointer; border:0; background:none}
+input,select,textarea{font:inherit; color:inherit}
+h1,h2,h3,h4{margin:0; line-height:1.35; letter-spacing:-.01em; font-weight:900}
+p{margin:.4em 0}
+::selection{background:var(--hi); color:var(--ink)}
+
+/* ---------- تایپوگرافی ---------- */
+.t-eyebrow{
+  font-family:var(--f-mono); font-size:11.5px; letter-spacing:.14em;
+  direction:ltr; text-transform:uppercase; color:var(--mute);
+}
+.t-h1{font-size:clamp(30px, 5.2vw, 58px); font-weight:900; line-height:1.28}
+.t-h2{font-size:clamp(22px, 3.2vw, 32px); font-weight:900}
+.t-h3{font-size:clamp(17px, 2vw, 20px); font-weight:700}
+.t-lead{font-size:clamp(15.5px, 1.7vw, 18px); color:var(--ink-2); line-height:2}
+.t-mono{font-family:var(--f-mono); direction:ltr; font-variant-numeric:tabular-nums}
+.t-num{font-variant-numeric:tabular-nums}
+
+/* ---------- ماژیک ---------- */
+/* کلمهٔ کلیدی زیر ماژیک می‌رود — مثل دفترِ درس */
+.hl{
+  background:linear-gradient(104deg,
+    transparent .5%, var(--hi) 4%, var(--hi) 96%, transparent 99%);
+  padding:.02em .18em; margin:0 -.08em; border-radius:3px;
+  box-decoration-break:clone; -webkit-box-decoration-break:clone;
+}
+.hl-sweep{position:relative; z-index:0}
+.hl-sweep::before{
+  content:''; position:absolute; inset:8% -2%; z-index:-1; border-radius:4px;
+  background:var(--hi); transform:scaleX(0) skewX(-8deg); transform-origin:right;
+  transition:transform .6s cubic-bezier(.22,1,.36,1);
+}
+.hl-sweep.on::before{transform:scaleX(1) skewX(-8deg)}
+
+/* ---------- مهر ---------- */
+.stamp{display:inline-flex; align-items:center; gap:.45em; font-weight:700}
+.stamp .dot{width:10px; height:10px; border-radius:50%; flex:none}
+.stamp.ok{color:var(--ok)} .stamp.ok .dot{background:var(--ok)}
+.stamp.mid{color:#B57F00} .stamp.mid .dot{background:var(--mid)}
+.stamp.next{color:var(--next)} .stamp.next .dot{background:var(--next)}
+.stamp.new{color:var(--mute)} .stamp.new .dot{background:transparent; border:2px dashed var(--line-2)}
+
+/* ---------- حرکتِ واحد (تنها کیت) ---------- */
+.rv{opacity:0; transform:translateY(14px); transition:opacity .5s ease, transform .5s var(--t-mid); transition-delay:calc(var(--i,0)*70ms)}
+.rv.on{opacity:1; transform:none}
+/* حالت تست/عکس: همه بی‌درنگ پیدا ( ?static=1 ) */
+html.static .rv{opacity:1 !important; transform:none !important; transition:none !important}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important}
+  .rv{opacity:1; transform:none}
+}
+
+/* ---------- اسکرول‌بار کاغذی ---------- */
+::-webkit-scrollbar{width:10px; height:10px}
+::-webkit-scrollbar-thumb{background:var(--line-2); border-radius:8px; border:2px solid var(--paper)}
+::-webkit-scrollbar-track{background:transparent}
